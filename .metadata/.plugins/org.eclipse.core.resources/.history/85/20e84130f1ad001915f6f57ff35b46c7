@@ -1,0 +1,51 @@
+package home;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Home
+ */
+@WebServlet(description = "Home page", urlPatterns = { "/home" })
+public class Home extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+    /**
+     * Default constructor. 
+     */
+    public Home() {
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		ServletOutputStream out = response.getOutputStream();
+		String user = request.getParameter("user");
+		out.println("<h1>Home page</h1>");
+		out.println("<h2>=="+this.getClass().getName()+"==</h2>");
+		out.println("<br><span>getParameter get User:</span>");
+		out.println(user);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+//		doGet(request, response);
+		ServletOutputStream out = response.getOutputStream();
+		String user = request.getParameterValues("user");
+		out.println("<br><span>getParameter post User:</span>");
+		out.println(user);
+	}
+
+}
