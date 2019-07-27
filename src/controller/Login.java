@@ -3,6 +3,8 @@ package controller;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,7 +21,7 @@ import validates.InputValidator;
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	@InputValidator(name="Email", min=6, max=35, msg="Email error!")
+	@InputValidator(name="email", min=6, max=35, msg="Email error!")
     public String userName; 
 
 	@InputValidator(name="password", min=6, max=20, msg="password error!")
@@ -46,31 +48,41 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 
-//			String userName = request.getParameter("email");
+		String userName = request.getParameter("email");
 //			
-//			String password = request.getParameter("password");
+		String password = request.getParameter("password");
         
 //        String rememberMeStr = request.getParameter("remember");
 //        boolean remember = "Y".equals(rememberMeStr);
 //
-//        boolean hasError = false;
-//        String errorString = null;
+        boolean hasError = false;
+        List<String> errorString = new ArrayList<String>();
         try {
         	Field[] fields = Login.class.getFields();
         	for(Field field:fields){
         		 for(Annotation ann:field.getAnnotations()){
                      if (ann instanceof InputValidator){
-                    	 InputValidator check = (InputValidator)ann;
-                         System.out.println(check.name());
-                         System.out.println(check.min());
-                         System.out.println(check.max());
-                         System.out.println(check.msg());
+                    	 InputValidator check = (InputValidator)ann;                    	 
+                    	 if("email".equals(check.name())){
+                    		 if( userName.length()<check.min() || userName.length()>check.max() ) {
+                    			 hasError = true;
+                    			 errorString.add(check.msg());
+                    		 }
+                    	 }                   	 
+                    	 if("password".equals(check.name())){
+                    		 if( password.length()<check.min() || password.length()>check.max() ) {
+                    			 hasError = true;
+                    			 errorString.add(check.msg());
+                    		 }
+                    	 }
                      }
                  }
         	}
         } catch (Exception e) { 
             e.printStackTrace(); 
         } 
+        request.setAttribute("hasError",hasError);
+        request.setAttribute("errorString",errorString);
         doGet(request,response);
 	}
 

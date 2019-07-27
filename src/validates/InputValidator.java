@@ -9,3 +9,4 @@ public @interface InputValidator {
    public int max();
    public String msg();
 }
+
