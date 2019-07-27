@@ -3,53 +3,41 @@ package controller;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 
 import com.google.gson.Gson;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import validates.InputValidator;
 import model.UserAcc;
+import validates.InputValidator;
+
 /**
- * Servlet implementation class Login
+ * Servlet implementation class Register
  */
-@WebServlet("/login")
-public class Login extends HttpServlet {
+@WebServlet("/register")
+public class Register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String ATT_USER_COOKIE = "COOKIE_USER";
-	
+    
 	@InputValidator(name="email", min=6, max=35, msg="The length limit your account should be 6 -36 characters")
     public String userName; 
 
 	@InputValidator(name="password", min=6, max=20, msg="The length limit your password should be 6 -20 characters")
     public String password;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public Register() {
         super();
     }
-    
-    public String getCookie(HttpServletRequest request) {
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (ATT_USER_COOKIE.equals(cookie.getName())) {
-                    return cookie.getValue();
-                }
-            }
-        }
-        return null;
-    }
-    
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -63,11 +51,9 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String userEmail = request.getParameter("email");
 		String password = request.getParameter("password");  
-        String remember = request.getParameter("remember");
-        boolean rememberMe = "Y".equals(remember);
+        String gender = request.getParameter("gender");        
 		UserAcc user = null;
         Map<String,String> errorString = new HashMap<String,String>();
         Map<String, Boolean> error = new HashMap<String, Boolean>();
@@ -99,44 +85,18 @@ public class Login extends HttpServlet {
         } catch (Exception e) { 
             e.printStackTrace(); 
         } 
-        if(rememberMe) {
-    		Cookie cookieUserEmail = new Cookie(ATT_USER_COOKIE, userEmail);
-            cookieUserEmail.setMaxAge(24 * 60 * 60);
-            response.addCookie(cookieUserEmail);
-    	} else {
-    		Cookie cookieUserEmail = new Cookie(ATT_USER_COOKIE, null);
-    		cookieUserEmail.setMaxAge(0);
-            response.addCookie(cookieUserEmail);
-    	}
-        String rememberAcc = getCookie(request);
-        System.out.println(rememberAcc);
         user = new UserAcc(userEmail,password);
         if( error.get("email") && error.get("password") ) {
-        	if(rememberAcc != null)request.setAttribute("user",rememberAcc);
+        	request.setAttribute("user",user);
         	request.setAttribute("errorString",errorString);
         	request.setAttribute("error",error);
         	doGet(request,response);
-        }else{
+        }else{     
         	Gson gson = new Gson();
-        	String getAcc = user.getAccount();
-        	UserAcc Account = gson.fromJson(getAcc, UserAcc.class);
-        	if((Account.email).equals(userEmail) && (Account.password).equals(password)) {
-        		response.sendRedirect(request.getContextPath());
-        	} 
-        	if(!(Account.email).equals(userEmail)) {
-        		error.put("email",true);
-   			 	errorString.put("email","Invaild email!");
-        	}
-        	if(!(Account.password).equals(password)) {
-        		error.put("password",true);
-   			 	errorString.put("password","Invaild password!");
-        	}
-        	if(rememberAcc != null)request.setAttribute("user",rememberAcc);
-        	request.setAttribute("errorString",errorString);
-        	request.setAttribute("error",error);
-        	doGet(request,response);
+        	user.setGender(gender);
+        	user.setAccount(gson.toJson(user));
+        	response.sendRedirect(request.getContextPath());
         }
-        
 	}
 
 }

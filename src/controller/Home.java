@@ -30,7 +30,6 @@ public class Home extends HttpServlet {
 		if( session.getAttribute("isLogin") != null ){
 			System.out.println(session.getAttribute("isLogin"));
 		}else{
-			System.out.println(request.getContextPath());
 			response.sendRedirect(request.getContextPath() + "/login");
 		}
 	}

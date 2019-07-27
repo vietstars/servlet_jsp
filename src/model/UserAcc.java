@@ -1,13 +1,21 @@
 package model;
 
-public class UserAcc {
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+import interfaces.Accounts;
+
+public class UserAcc implements Accounts {
 	
 	public static final String G_MALE ="M";
 	public static final String G_FEMALE = "F";
 	    
 	public String email;
-	private String gender = G_MALE;
-	private String password;
+	public String gender = G_MALE;
+	public String password;
 	   
 	public UserAcc(String email, String password) {
 		this.email = email;
@@ -37,4 +45,29 @@ public class UserAcc {
 	public void setPassword(String password) {
 	   this.password = password;
 	}
+	
+	public void	setAccount(String json) {
+		try(
+			ObjectOutputStream setAcc = new ObjectOutputStream(new FileOutputStream("D:\\java\\core\\review\\WebContent\\public\\accounts.json"))
+		){	
+			setAcc.writeObject(json);
+		} catch (IOException i) {
+            i.printStackTrace();
+        }
+	}
+	
+	public String getAccount() {
+		String account = null;
+		try (
+			ObjectInputStream getAcc = new ObjectInputStream(new FileInputStream("D:\\java\\core\\review\\WebContent\\public\\accounts.json")); 
+		){
+			account = (String) getAcc.readObject();
+		} catch (IOException i) {
+			i.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return account;
+	}
+
 }

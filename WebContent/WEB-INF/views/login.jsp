@@ -7,7 +7,7 @@
 		<form method="post">
 		  <div class="form-group">
 		    <label for="exampleInputEmail1">Email address</label>
-		    <input type="text" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value="${user.email}">
+		    <input type="text" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value="${user}">
 		    <c:if test = "${error.email}">
 		    	<small id="emailHelp" class="form-text text-danger">${errorString.email}</small>
 		    </c:if>
@@ -20,8 +20,8 @@
 		    </c:if>
 		  </div>
 		  <div class="form-group form-check">
-		    <input type="checkbox" class="form-check-input" name="remember" id="exampleCheck1">
-		    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+		    <input type="checkbox" class="form-check-input" name="remember" value="Y" id="remember" ${(cookie['COOKIE_USER'].getValue() != null)?"checked":null}>
+		    <label class="form-check-label" for="remember">Check me out</label>
 		  </div>
 		  <button type="submit" class="btn btn-primary">Submit</button>
 		</form>
