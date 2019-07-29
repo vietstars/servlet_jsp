@@ -8,15 +8,15 @@
 		  <div class="form-group">
 		    <label for="exampleInputEmail1">Email address</label>
 		    <input type="text" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value="${user}" />
-		    <c:if test = "${error.email}">
-		    	<small id="emailHelp" class="form-text text-danger">${errorString.email}</small>
+		    <c:if test = "${!'false'.equals(error.email)}">
+		    	<small id="emailHelp" class="form-text text-danger">${error.email}</small>
 		    </c:if>
 		  </div>
 		  <div class="form-group">
 		    <label for="exampleInputPassword1">Password</label>
 		    <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Enter password" />
-		    <c:if test = "${error.password}">
-		    	<small id="emailHelp" class="form-text text-danger">${errorString.password}</small>
+		    <c:if test = "${!'false'.equals(error.password)}">
+		    	<small id="emailHelp" class="form-text text-danger">${error.password}</small>
 		    </c:if>
 		  </div>
 		  <div class="form-group form-check">
