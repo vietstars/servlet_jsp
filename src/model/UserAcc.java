@@ -48,7 +48,7 @@ public class UserAcc implements Accounts {
 	
 	public void	setAccount(String json) {
 		try(
-			ObjectOutputStream setAcc = new ObjectOutputStream(new FileOutputStream("D:\\java\\core\\review\\WebContent\\public\\accounts.json"))
+			ObjectOutputStream setAcc = new ObjectOutputStream(new FileOutputStream("D:\\java\\review\\pwater\\WebContent\\public\\accounts.json"))
 		){	
 			setAcc.writeObject(json);
 		} catch (IOException i) {
@@ -59,7 +59,7 @@ public class UserAcc implements Accounts {
 	public String getAccount() {
 		String account = null;
 		try (
-			ObjectInputStream getAcc = new ObjectInputStream(new FileInputStream("D:\\java\\core\\review\\WebContent\\public\\accounts.json")); 
+			ObjectInputStream getAcc = new ObjectInputStream(new FileInputStream("D:\\java\\review\\pwater\\WebContent\\public\\accounts.json")); 
 		){
 			account = (String) getAcc.readObject();
 		} catch (IOException i) {

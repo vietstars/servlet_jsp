@@ -109,9 +109,8 @@ public class Login extends HttpServlet {
             response.addCookie(cookieUserEmail);
     	}
         String rememberAcc = getCookie(request);
-        System.out.println(rememberAcc);
         user = new UserAcc(userEmail,password);
-        if( error.get("email") && error.get("password") ) {
+        if( error.get("email") || error.get("password") ) {
         	if(rememberAcc != null)request.setAttribute("user",rememberAcc);
         	request.setAttribute("errorString",errorString);
         	request.setAttribute("error",error);
@@ -131,10 +130,14 @@ public class Login extends HttpServlet {
         		error.put("password",true);
    			 	errorString.put("password","Invaild password!");
         	}
-        	if(rememberAcc != null)request.setAttribute("user",rememberAcc);
-        	request.setAttribute("errorString",errorString);
-        	request.setAttribute("error",error);
-        	doGet(request,response);
+        	if( error.get("email") || error.get("password") ) {
+            	if(rememberAcc != null)request.setAttribute("user",rememberAcc);
+            	request.setAttribute("errorString",errorString);
+            	request.setAttribute("error",error);
+            	doGet(request,response);
+        	}else{
+        		response.sendRedirect(request.getContextPath());
+        	}
         }
         
 	}
