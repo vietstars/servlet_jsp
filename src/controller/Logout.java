@@ -1,8 +1,6 @@
 package controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,16 +9,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class Home
+ * Servlet implementation class Logout
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/home" })
-public class Home extends HttpServlet {
+@WebServlet("/logout")
+public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
-    public Home() {
+    public Logout() {
+        super();
         // TODO Auto-generated constructor stub
     }
 
@@ -29,15 +28,10 @@ public class Home extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		if( session.getAttribute("isLogin") != null && (boolean) session.getAttribute("isLogin") ){
-			request.setAttribute("view", this.getClass().getSimpleName().toLowerCase() + ".jsp");
-			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/_layout.jsp");
-			dispatcher.forward(request, response);
-		}else{
-			response.sendRedirect(request.getContextPath() + "/login");
-		}
+		session.invalidate();
+	    response.sendRedirect(request.getContextPath());
+	    return;
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -45,5 +39,4 @@ public class Home extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }

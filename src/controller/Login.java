@@ -15,6 +15,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import validates.InputValidator;
 import model.UserAcc;
@@ -63,7 +64,6 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String userEmail = request.getParameter("email");
 		String password = request.getParameter("password");  
         String remember = request.getParameter("remember");
@@ -120,23 +120,26 @@ public class Login extends HttpServlet {
         	String getAcc = user.getAccount();
         	UserAcc Account = gson.fromJson(getAcc, UserAcc.class);
         	if((Account.email).equals(userEmail) && (Account.password).equals(password)) {
-        		response.sendRedirect(request.getContextPath());
-        	} 
-        	if(!(Account.email).equals(userEmail)) {
-        		error.put("email",true);
-   			 	errorString.put("email","Invaild email!");
-        	}
-        	if(!(Account.password).equals(password)) {
-        		error.put("password",true);
-   			 	errorString.put("password","Invaild password!");
-        	}
-        	if( error.get("email") || error.get("password") ) {
-            	if(rememberAcc != null)request.setAttribute("user",rememberAcc);
-            	request.setAttribute("errorString",errorString);
-            	request.setAttribute("error",error);
-            	doGet(request,response);
+        		HttpSession session = request.getSession();
+        		session.setAttribute("isLogin", true);
+        		session.setAttribute("loggedId", Account.email);
+        		session.setAttribute("loggedGender", Account.gender);
+        		response.sendRedirect(request.getContextPath() + "/home");
         	}else{
-        		response.sendRedirect(request.getContextPath());
+        		if(!(Account.email).equals(userEmail)) {
+            		error.put("email",true);
+       			 	errorString.put("email","Invaild email!");
+            	}
+            	if(!(Account.password).equals(password)) {
+            		error.put("password",true);
+       			 	errorString.put("password","Invaild password!");
+            	}
+            	if( error.get("email") || error.get("password") ) {
+                	if(rememberAcc != null)request.setAttribute("user",rememberAcc);
+                	request.setAttribute("errorString",errorString);
+                	request.setAttribute("error",error);
+                	doGet(request,response);
+            	}
         	}
         }
         
