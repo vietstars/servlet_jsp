@@ -79,8 +79,8 @@ public class Login extends HttpServlet {
             response.addCookie(cookieUserEmail);
     	}
         String rememberAcc = getCookie(request);
-        InputValidatiorHandle validate = new InputValidatiorHandle();
         user = new UserAcc(userEmail,password);
+        InputValidatiorHandle validate = new InputValidatiorHandle();
         try {
         	error = validate.check(this);
 		} catch (Exception e) {

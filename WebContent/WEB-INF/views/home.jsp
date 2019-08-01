@@ -5,6 +5,7 @@
 	<div class="col-4 offset-sm-4 mt-5">
 		<h1 class="text-center">Home page!</h1>
 		<h5>User: ${sessionScope.loggedId}</h5>
-		<h5>Gender: ${"M".equals(sessionScope.loggedGender)?"Male":"Female"}</h5>
+		<c:set var="Male" scope = "session" value = "M"/>
+		<h5>Gender: ${Male.equals(sessionScope.loggedGender)?"Male":"Female"}</h5>
 	</div>
 </div>

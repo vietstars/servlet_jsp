@@ -1,70 +1,207 @@
 # Overview
-<ol>
-	<li>[Setup environment](#setup-environment)</li>
-	<li>[First application](#first-application)</li>
-	<li>[Java syntax](#java-syntax)</li>
-	<li>[Java OOP](#java-oop)</li>
-	<li>[Java exceptions](#java-exceptions)</li>
-	<li>[Java Serialization](#java-serialization)</li>
-</ol>
+*	[Setup environment](#markdown-header-setup-environment)
+*	[Import application](#markdown-header-import-application)
+*	[Application flow](#markdown-header-application-flow)
+*	[Java OOP](#markdown-header-java-oop)
+*	[Generic types](#markdown-header-generic-types)
+*	[Java Lambda](#markdown-header-Java-Lambda)
+*	[Java exceptions](#markdown-header-java-exceptions)
+*	[Java Serialization](#markdown-header-java-serialization)
+*	[About of annotation](#markdown-header-about-of-annotation)
+
 
 # Setup environment
-<!-- ![alt text] -->
-![Screenshot](doc/evn.jpg)<br>
-	__1.__ [__URL: https://www.oracle.com/technetwork/java/javase/downloads/__](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-	<ul>
-		<li>Cài môi trường cho java cần có jdk theo Url để tải source.</li>
-		<li>Chọn Accept License Agreement và phiên bản cần gài.</li>
-		<li>jdk-8u221-windows-i586.exe bản cài cho window 32 bit.</li>
-		<li>jdk-8u221-windows-x64.exe bản cài cho window 32 bit.</li>
-	</ul>
-![Screenshot](doc/installed.jpg)<br>
-	 __2. Sau khi cài đặt xong:__
-	<ul>
-  		<li>Chúng ta sẽ có được thư mục cài đặt như hình trên.</li>
-  		<li>Cần phải cài đặt environment variable cho java</li>
-	</ul>
-![Screenshot](doc/envparam1.jpg)<br>
-	__3. Cài PATH cho java:__
-	<ul>
-  		<li>Chọn This PC <small>[click chuột phải]</small> chọn Properties</li>
-  		<li>Tại màn hình System chọn Advanced system setting sẽ chuyển qua màn hình như hình bên dưới là màn hình System properties</li>
-	</ul>
-![Screenshot](doc/envparam2.jpg)<br>
-	__4. Cài PATH cho java:__
-	<ul>
-	   <li>Tại màn hình System properties (1) chọn Environment variables (2) sẽ chuyển qua màn hình Environment variables (3)</li>
-  	   <li>Tại màn hình Environment variables (3) <small>[Click đôi]</small> vào vị trí Path (4) sễ chuyển qua màn hình Edit</li>
-	</ul>
-![Screenshot](doc/envparam3.jpg)<br>
-	__5. Cài PATH cho java:__
-	<ul>
-		<li>Tại màn hình Edit environment variables (1) chọn New (2)</li>
-		<li>Nhập path của thư mục java (3) như hình chọn Ok</li>
-	</ul>
-	<i>
-		Như vậy là đã cài đặt môi trường cho Java thành công<br>
-		Để test dùng Cmd gõ: __java -version__
-	</i>
-![Screenshot](doc/tool.jpg)<br>
-	__6. Cài Tool để viết Java:__
-	[https://spring.io/tools]("https://spring.io/tools")<br>
-	<ul>
-		<li>Theo Url trên để đến trang tải tool về làm việc với java</li>
-		<li>Chọn bản cải đặt thích hợp <i>(chọn bản window 64-bit)</i></li>
-	</ul>
-	<i>Cài đặt như app bình thường.</i>
-## First application
-![Screenshot](doc/firstapp1.jpg)<br>
-	<h4>1. Sau khi cài Tool và chạy sẽ hiện ra màn hình bên trên</h4>
+![Alt text](doc/evn.jpg)
 
-## Java syntax
+*	__[URL: https://www.oracle.com/technetwork/java/javase/downloads/](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)__
+	+	Install environment for java required jdk, Url in above is link source.
+	+	Click Accept License Agreement and choose version to install .
+	+	jdk-8u221-windows-i586.exe for 32 bit window.
+	+	jdk-8u221-windows-x64.exe for 64 bit window.
 
+![Alt text](doc/installed.jpg)
 
-## Java OOP
+*	__After install jdk:__
+	+	We will have above picture after installed jdk.
+	+	We must be install environment variable for java
 
+![Alt text](doc/envparam1.jpg)
 
-## Java exceptions
+*	__Installation of environment variable for java:__
+	+	On __This PC__ *[right click]* select __Properties__
+	+	On __System__ tab select __Advanced system setting__ we will get __System properties__ tab as below picture
 
+![Alt text](doc/envparam2.jpg)
 
-## Java Serialization
+*	__Installation of environment variable for java:__
+	+	On __System properties__ tab (1) select __Environment variables__ (2) we will get __Environment variables__ tab (3)
+	+	On __Environment variables__ tab (3) *[double click]* at Path (4) we will get __Edit__ tab
+
+![Alt text](doc/envparam3.jpg)
+
+*	__Installation of environment variable for java:__
+	+	On __Edit environment variables__ tab (1) select __New__ (2)
+	+	Enter java folder path which you just installed (3) as above picture then click __Ok__
+	+	_Ok we just finish to install Java environment_
+	+	_Test again, we using Cmd and type:_ __java -version__
+
+![Alt text](doc/tool.jpg)
+
+*	__Installation of Tool for working with Java:__
+
+	[https://spring.io/tools]("https://spring.io/tools")
+
+	+	Click above Url to download tool for java
+	+	Select correctly install source 
+
+-	_(select window 64-bit)_
+-	_Install application like normally application._
+
+# Import application
+
+git clone https://Lampart_Thai_Huy_Binh@bitbucket.org/Lampart_Thai_Huy_Binh/java_core.git pwater
+
++		Clone git source into __pwater__ folder.
++		Open __Spring tool suite__ select __Import__
++		On __Import projects from Folder or Archire__ tab > select __next__.
++		On __Import source:__ bar click __Directory...__
++		Select *pwater*'s parent folder path which you just extract git url then click Finish.
+
+# App flow
+
+![Screenshot](doc/review_Java.svg)
+
+*Right click  on above image then select open image in new tab to view fully image*
+
+# About of annotation
+
+-		Create Annotation:
+	+ 	validates/InputValidator.java (6-11)
+
+```
+@Retention(RetentionPolicy.RUNTIME)
+public @interface InputValidator {
+	public String name();
+	public int min();
+	public int max();
+	public String msg();
+}
+```
+
+-		Use and config for Annotation:
+	+	Declare annotation: controller/register.java (28-32)
+```
+	@InputValidator(name="email", min=6, max=35, msg="The length limit your account should be 6 -36 characters")
+    public String userName; 
+
+	@InputValidator(name="password", min=6, max=20, msg="The length limit your password should be 6 -20 characters")
+    public String password;
+```
+
+-		Using as configuration annotation: 
+	+	controller/register.java (60-87)
+```
+try {
+	Field[] fields = Login.class.getFields();
+	for(Field field:fields){
+		 for(Annotation ann:field.getAnnotations()){
+             if (ann instanceof InputValidator){
+            	 InputValidator check = (InputValidator)ann;                    	 
+            	 if("email".equals(check.name())){
+            		 if( userEmail.length()<check.min() || userEmail.length()>check.max() ) {
+            			 error.put("email",true);
+            			 errorString.put("email",check.msg());
+            		 } else {
+            			 error.put("email",false);
+            		 }
+            	 }                   	 
+            	 if("password".equals(check.name())){
+            		 if( password.length()<check.min() || password.length()>check.max() ) {
+            			 error.put("password",true);
+            			 errorString.put("password",check.msg());
+            		 } else {
+            			 error.put("password",false);
+            		 }
+            	 }
+             }
+         }
+	}
+} catch (Exception e) { 
+    e.printStackTrace(); 
+} 
+```
+
+-		deploy configuration's validation:
+	+	views/register.java (12-14) (19-21)
+```
+<c:if test = "${error.email}">
+	<small id="emailHelp" class="form-text text-danger">${errorString.email}</small>
+</c:if>
+```
+```
+<c:if test = "${error.password}">
+	<small id="emailHelp" class="form-text text-danger">${errorString.password}</small>
+</c:if>
+```
+
+-		Using as presentation annotation: 
+	+	validates/InputValidatiorHandle.java (9-33)
+	+ 	method Check is AnnotationPresent for validates/InputValidator.java (13)
+```
+field.isAnnotationPresent(InputValidator.class)
+```
+
+-		Use present annotation in application:
+	+	controller/login.java (83-88)
+```
+InputValidatiorHandle validate = new InputValidatiorHandle();
+try {
+	error = validate.check(this);
+} catch (Exception e) {
+	e.printStackTrace();
+}
+```
+-		validation of present annotaion:
+	+	controller/login.java (89-116)
+```
+if( error.get("email") != null || error.get("password") != null ) {
+	if(rememberAcc != null)request.setAttribute("user",rememberAcc);
+	request.setAttribute("error",error);
+	doGet(request,response);
+}else{
+	Gson gson = new Gson();
+	String getAcc = user.getAccount();
+	UserAcc Account = gson.fromJson(getAcc, UserAcc.class);
+	if((Account.email).equals(this.userEmail) && (Account.password).equals(this.password)) {
+		HttpSession session = request.getSession();
+		session.setAttribute("isLogin", true);
+		session.setAttribute("loggedId", Account.email);
+		session.setAttribute("loggedGender", Account.gender);
+		response.sendRedirect(request.getContextPath() + "/home");
+	}else{
+		if(!(Account.email).equals(this.userEmail)) {
+    		error.put("email","Email not found!");
+    	}
+    	if(!(Account.password).equals(this.password)) {
+    		error.put("password","Invaild password!");
+    	}
+    	if( error.get("email") != null || error.get("password") != null ) {
+        	if(rememberAcc != null)request.setAttribute("user",rememberAcc);
+        	request.setAttribute("error",error);
+        	doGet(request,response);
+    	}
+	}
+}
+```
+-		Deploy presentation's validation:
+	+	views/login.java (12-14) (19-21)
+```
+<c:if test = "${error.email}">
+	<small id="emailHelp" class="form-text text-danger">${errorString.email}</small>
+</c:if>
+```
+```
+<c:if test = "${error.password}">
+	<small id="emailHelp" class="form-text text-danger">${errorString.password}</small>
+</c:if>
+```
